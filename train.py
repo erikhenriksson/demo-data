@@ -11,6 +11,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, f1_score
 import numpy as np
 
+from transformers import EarlyStoppingCallback
+
 # Load and prepare data
 df = pd.read_csv("fincore_simplified.tsv", sep="\t")
 le = LabelEncoder()
@@ -86,7 +88,8 @@ training_args = TrainingArguments(
     metric_for_best_model="f1",
     save_strategy="steps",
     save_steps=500,
-    early_stopping_patience=5,
+    callbacks=[EarlyStoppingCallback(early_stopping_patience=5)]  # Add early stopping here
+    )
 )
 
 # Initialize Trainer
