@@ -70,9 +70,9 @@ tokenized_test = test_dataset.map(tokenize_function, batched=True)
 
 
 # Compute metrics function
-def compute_metrics(eval_pred):
-    predictions, labels = eval_pred
-    predictions = np.argmax(predictions, axis=1)
+def compute_metrics(eval_preds):
+    logits, labels = eval_preds
+    predictions = np.argmax(logits, axis=-1)
     return {"f1": f1_score(labels, predictions, average="weighted")}
 
 
@@ -87,6 +87,7 @@ training_args = (
         eval_steps=500,
         load_best_model_at_end=True,
         metric_for_best_model="f1",
+        greater_is_better=True,
         save_strategy="steps",
         save_steps=500,
     ),
