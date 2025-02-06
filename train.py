@@ -43,7 +43,7 @@ for split_name, df in [
     ("Test", test_df),
 ]:
     print(f"\n{split_name} set:")
-    class_dist = df["class"].value_counts()
+    class_dist = df["label"].value_counts()
     for class_name, count in class_dist.items():
         print(f"{class_name}: {count} samples ({count/len(df)*100:.1f}%)")
 
