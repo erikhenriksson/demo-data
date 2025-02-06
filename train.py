@@ -12,7 +12,7 @@ from sklearn.metrics import classification_report, f1_score
 import numpy as np
 
 # Load and prepare data
-df = pd.read_csv("your_file.tsv", sep="\t")
+df = pd.read_csv("fincore_simplified.tsv", sep="\t")
 le = LabelEncoder()
 df["label"] = le.fit_transform(df["class"])
 
