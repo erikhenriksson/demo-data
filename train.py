@@ -14,7 +14,7 @@ import numpy as np
 # Load and prepare data
 df = pd.read_csv("fincore_simplified.tsv", sep="\t")
 le = LabelEncoder()
-df["label"] = le.fit_transform(df["class"])
+df["label"] = le.fit_transform(df["register"])
 
 # Create stratified splits
 train_df, temp_df = train_test_split(
