@@ -77,20 +77,21 @@ def compute_metrics(eval_pred):
 
 
 # Training arguments
-training_args = TrainingArguments(
-    output_dir="finnish_bert_finetuned",
-    num_train_epochs=5,
-    per_device_train_batch_size=8,
-    per_device_eval_batch_size=8,
-    evaluation_strategy="steps",
-    eval_steps=500,
-    load_best_model_at_end=True,
-    metric_for_best_model="f1",
-    save_strategy="steps",
-    save_steps=500,
-    callbacks=[EarlyStoppingCallback(early_stopping_patience=5)]  # Add early stopping here
-    )
+training_args = (
+    TrainingArguments(
+        output_dir="finnish_bert_finetuned",
+        num_train_epochs=5,
+        per_device_train_batch_size=8,
+        per_device_eval_batch_size=8,
+        evaluation_strategy="steps",
+        eval_steps=500,
+        load_best_model_at_end=True,
+        metric_for_best_model="f1",
+        save_strategy="steps",
+        save_steps=500,
+    ),
 )
+
 
 # Initialize Trainer
 trainer = Trainer(
@@ -99,6 +100,7 @@ trainer = Trainer(
     train_dataset=tokenized_train,
     eval_dataset=tokenized_val,
     compute_metrics=compute_metrics,
+    callbacks=[EarlyStoppingCallback(early_stopping_patience=5)],
 )
 
 # Train the model
